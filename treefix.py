@@ -14,6 +14,9 @@ issues = Table('issues', metadata,
 
 iss = issues.select().execute()
 
+
+nodes = {}
+
 class Node():
     
     def children(self):
@@ -38,7 +41,6 @@ for i in iss:
 
 
 
-nodes = {}
 
 def walk_children(node, c):
     c += 1
