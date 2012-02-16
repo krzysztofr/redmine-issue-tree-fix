@@ -1,6 +1,6 @@
 from sqlalchemy import *
 
-db = create_engine('mysql://redmine:redmine@localhost/redmine_test')
+db = create_engine('mysql://redmine:redmine@localhost/redmine_default')
 
 metadata = MetaData(db)
 
@@ -13,6 +13,19 @@ issues = Table('issues', metadata,
 )
 
 iss = issues.select().execute()
+
+class Node():
+    
+    def children(self):
+        cs = []
+        # troche nieladne, ale trudno
+        for ch in nodes.values():
+            if ch.parent_id == self.id:
+                cs.append(ch)
+        
+        return cs
+
+ 
 
 for i in iss:
     n = Node()
@@ -37,18 +50,7 @@ def walk_children(node, c):
     return c
 
 
-class Node():
-    
-    def children(self):
-        cs = []
-        # troche nieladne, ale trudno
-        for ch in nodes.values():
-            if ch.parent_id == self.id:
-                cs.append(ch)
-        
-        return cs
-
-    
+   
 
 
 for node in nodes.values():
